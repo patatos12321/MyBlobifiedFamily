@@ -8,7 +8,7 @@ public class WaveManager : MonoBehaviour
     public GameObject[] Mobs;
     public SpawnWarningBehaviour SpawnWarning;
     private SpawnWarningBehaviour instantiatedSpawnWarning;
-    private int spawnWarningDelay = 30;
+    private readonly int spawnWarningDelay = 30;
     private Vector3 spawnLocation;
     
     private int delay = 100;
@@ -50,11 +50,10 @@ public class WaveManager : MonoBehaviour
 
     private void InstantiateSpawnWarning()
     {
-        var rand = new System.Random();
-        spawnLocation = new Vector3(rand.Next(-10, 10), rand.Next(-10, 10), this.gameObject.transform.position.z);
-
         if (instantiatedSpawnWarning == null && currentDelay >= delay - spawnWarningDelay)
         {
+            var rand = new System.Random();
+            spawnLocation = new Vector3(rand.Next(-10, 10), rand.Next(-10, 10), this.gameObject.transform.position.z);
             instantiatedSpawnWarning = Instantiate(SpawnWarning, spawnLocation, Quaternion.identity, this.transform);
         }
     }
