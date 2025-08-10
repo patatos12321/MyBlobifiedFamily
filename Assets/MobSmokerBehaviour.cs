@@ -8,6 +8,7 @@ public class MobSmokerBehaviour : MonoBehaviour
     public const int NbFramesBeforeLaunch = 15;
     public const int Speed = 1000;
     public const int MaxHealth = 50;
+    public int Strength = 10;
     private int _currentHealth = 50;
 
     private int _currentNbFramesBeforeLaunch = 0;
@@ -42,6 +43,12 @@ public class MobSmokerBehaviour : MonoBehaviour
         _currentNbFramesBeforeLaunch=0;
     }
 
+    public void Push(int force, Vector3 from)
+    {
+        var direction = (this.transform.position - from).normalized;
+        _rb.AddForce(new Vector2(direction.x * force, direction.y * force));
+    }
+
     public void Damage(int dmg)
     {
         _currentHealth -= dmg;
@@ -56,8 +63,5 @@ public class MobSmokerBehaviour : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private bool IsDead()
-    {
-        return _currentHealth <= 0;
-    }
+    private bool IsDead() => _currentHealth <= 0;
 }

@@ -1,3 +1,6 @@
+using System;
+using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -11,13 +14,17 @@ public class WaveManager : MonoBehaviour
 
     private readonly int _spawnWarningDelay = 30;
     private Vector3 _spawnLocation;
-    
-    private int _delay = 100;
+
+    private int _delay = 150;
     private int _currentDelay = 100;
+
+    private Stopwatch _timer = new Stopwatch();
+    public TMP_Text TimerText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _player = FindFirstObjectByType<PlayerBlobBehaviour>();
+        _timer.Start();
     }
 
     // Update is called once per frame
@@ -33,6 +40,16 @@ public class WaveManager : MonoBehaviour
         DestroySpawnWarning();
         SpawnMobs();
         _currentDelay = 0;
+    }
+    private void Update()
+    {
+        UpdateTimer();
+    }
+
+    private void UpdateTimer()
+    {
+        var minutes = Math.Floor(_timer.Elapsed.TotalMinutes);
+        TimerText.text = $"{minutes}:{_timer.Elapsed.Seconds:00}";
     }
 
     private void SpawnMobs()

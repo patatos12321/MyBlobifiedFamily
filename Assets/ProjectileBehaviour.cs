@@ -44,10 +44,9 @@ public class ProjectileBehaviour : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //todo: handle different mob types
-        var mob = collision.collider.GetComponent<MobSmokerBehaviour>();
-        if (mob == null)
+        if (!collision.collider.TryGetComponent<MobSmokerBehaviour>(out var mob))
         {
-            mob = collision.otherCollider.GetComponent<MobSmokerBehaviour>();
+            collision.otherCollider.TryGetComponent(out mob);
             if (mob == null)
             {
                 return;
