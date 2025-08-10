@@ -5,6 +5,13 @@ public class SceneLoader : MonoBehaviour
 {
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        if (sceneName == "Game")
+        {
+            FindFirstObjectByType<GameManagerBehaviour>().Start();
+        }
+        else 
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }

@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,13 +16,15 @@ public class PlayerBlobBehaviour : MonoBehaviour
     public int CurrentHealth => _currentHealth;
 
     private Rigidbody2D _rb;
-    private int _invincibilityDelay = 10;
+    private Animator _animator;
+    private int _invincibilityDelay = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _currentHealth = MaxHealth;
         _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         foreach (var weapon in WeaponBehaviours)
         {
             //todo: Spawn multiple weapons
@@ -52,13 +55,35 @@ public class PlayerBlobBehaviour : MonoBehaviour
         {
             newPosition.y += MoveSpeed;
         }
+
+        newPosition = HandleOutOfBounds(newPosition);
+
         _rb.MovePosition(newPosition);
+    }
+
+    private static Vector2 HandleOutOfBounds(Vector2 newPosition)
+    {
+        if (newPosition.y > 10)
+            newPosition.y = 10;
+        if (newPosition.y < -10)
+            newPosition.y = -10;
+        if (newPosition.x > 10)
+            newPosition.x = 10;
+        if (newPosition.x < -10)
+            newPosition.x = -10;
+        return newPosition;
     }
 
     private void DecayInvincibility()
     {
         if (_invincibilityDelay <= 0) return;
+        
         _invincibilityDelay--;
+
+        if (_invincibilityDelay <=0)
+        {
+            _animator.SetBool("Invincible", false);
+        }
     }
 
     void Update()
@@ -108,7 +133,8 @@ public class PlayerBlobBehaviour : MonoBehaviour
 
     private void BecomeInvincible()
     {
-        _invincibilityDelay = 10;
+        _invincibilityDelay = 20;
+        _animator.SetBool("Invincible", true);
     }
 
     private void Pushback(MobSmokerBehaviour mob)
@@ -124,7 +150,8 @@ public class PlayerBlobBehaviour : MonoBehaviour
 
     private static void Lose()
     {
-        SceneManager.LoadScene("Defeat");
+        var gameManager = FindFirstObjectByType<GameManagerBehaviour>();
+        gameManager.Defeat();
     }
 
     private bool IsDead() => CurrentHealth < 0;//player can be alive at 0 cause why not

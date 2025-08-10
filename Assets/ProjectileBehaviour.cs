@@ -43,6 +43,12 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.collider.CompareTag("OutOfBounds") || collision.otherCollider.CompareTag("OutOfBounds"))
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         //todo: handle different mob types
         if (!collision.collider.TryGetComponent<MobSmokerBehaviour>(out var mob))
         {

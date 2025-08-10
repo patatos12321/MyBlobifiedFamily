@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
+    private GameManagerBehaviour _gameManager;
     private PlayerBlobBehaviour _player;
     public PlayerBlobBehaviour Player => _player;
     public GameObject[] Mobs;
@@ -20,9 +21,11 @@ public class WaveManager : MonoBehaviour
 
     private Stopwatch _timer = new Stopwatch();
     public TMP_Text TimerText;
+    public TMP_Text CoinsText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+       _gameManager = FindFirstObjectByType<GameManagerBehaviour>();
         _player = FindFirstObjectByType<PlayerBlobBehaviour>();
         _timer.Start();
     }
@@ -44,6 +47,7 @@ public class WaveManager : MonoBehaviour
     private void Update()
     {
         UpdateTimer();
+        UpdateCoins();
     }
 
     private void UpdateTimer()
@@ -52,11 +56,16 @@ public class WaveManager : MonoBehaviour
         TimerText.text = $"{minutes}:{_timer.Elapsed.Seconds:00}";
     }
 
+    private void UpdateCoins()
+    {
+        CoinsText.text = _gameManager.NbCoins.ToString();
+    }
+
     private void SpawnMobs()
     {
         foreach (var mob in Mobs)
         {
-            var instantiatedMob = Instantiate(mob, _spawnLocation, Quaternion.identity, this.transform);
+            Instantiate(mob, _spawnLocation, Quaternion.identity, this.transform);
         }
     }
 

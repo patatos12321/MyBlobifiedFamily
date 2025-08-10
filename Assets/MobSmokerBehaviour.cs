@@ -5,10 +5,13 @@ public class MobSmokerBehaviour : MonoBehaviour
     private Rigidbody2D _rb;
     private WaveManager _waveManager;
 
+    public GameObject Coin;
+
     public const int NbFramesBeforeLaunch = 15;
     public const int Speed = 1000;
     public const int MaxHealth = 50;
     public int Strength = 10;
+    public int NbCoinDropped = 1;
     private int _currentHealth = 50;
 
     private int _currentNbFramesBeforeLaunch = 0;
@@ -60,6 +63,9 @@ public class MobSmokerBehaviour : MonoBehaviour
 
     private void Die()
     {
+        var coin = Instantiate(Coin);
+        coin.transform.position = this.transform.position;
+        coin.GetComponent<CoinBehaviour>().Amount = 1;
         Destroy(this.gameObject);
     }
 
