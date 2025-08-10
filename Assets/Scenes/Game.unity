@@ -649,6 +649,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 0.1
+  WeaponBehaviours:
+  - {fileID: 7215919345529689527, guid: 6e96c651f8e443849a8c8a6c82120c2d, type: 3}
 --- !u!212 &1395676066
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -758,7 +760,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 0.90625}
+    oldSize: {x: 0.64, y: 0.58}
     newSize: {x: 0.64, y: 0.54}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
