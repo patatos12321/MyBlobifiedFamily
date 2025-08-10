@@ -7,7 +7,7 @@ public class SceneLoader : MonoBehaviour
     {
         if (sceneName == "Game")
         {
-            FindFirstObjectByType<GameManagerBehaviour>().Start();
+            FindFirstObjectByType<GameManagerBehaviour>().StartGame();
         }
         else 
         {

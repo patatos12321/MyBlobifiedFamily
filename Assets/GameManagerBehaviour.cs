@@ -13,7 +13,7 @@ public class GameManagerBehaviour : MonoBehaviour
         SceneManager.LoadScene("Defeat");
     }
 
-    public void Start()
+    public void StartGame()
     {
         ResetGear();
         SceneManager.LoadScene("Game");
