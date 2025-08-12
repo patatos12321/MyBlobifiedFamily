@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
+    public WeaponBehaviour Weapon;
     public int Pushback = 1000;
     public int Damage = 10;
     public int Speed = 100;
@@ -38,6 +39,12 @@ public class ProjectileBehaviour : MonoBehaviour
             return;
         }
 
+        if (Weapon != null)
+        {
+            Weapon.LookAt(_closestMob);
+        }
+        LookAt(_closestMob.transform);
+
         var direction = (_closestMob.transform.position - this.transform.position).normalized;
         this.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction.x * Speed, direction.y * Speed));
     }
@@ -59,5 +66,12 @@ public class ProjectileBehaviour : MonoBehaviour
         mob.Damage(Damage);
         mob.Push(Pushback, this.transform.position);
         Destroy(this.gameObject);
+    }
+
+    public void LookAt(Transform target)
+    {
+        var direction = target.position - transform.position;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }

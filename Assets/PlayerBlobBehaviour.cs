@@ -127,7 +127,10 @@ public class PlayerBlobBehaviour : MonoBehaviour
     {
         if (!collision.otherCollider.TryGetComponent<MobSmokerBehaviour>(out var mob))
         {
-            return;
+            if (!collision.collider.TryGetComponent(out mob))
+            {
+                return;
+            }
         }
 
         if (_invincibilityDelay <= 0)
