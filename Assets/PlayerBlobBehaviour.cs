@@ -77,10 +77,10 @@ public class PlayerBlobBehaviour : MonoBehaviour
     private void DecayInvincibility()
     {
         if (_invincibilityDelay <= 0) return;
-        
+
         _invincibilityDelay--;
 
-        if (_invincibilityDelay <=0)
+        if (_invincibilityDelay <= 0)
         {
             _animator.SetBool("Invincible", false);
         }
@@ -115,9 +115,9 @@ public class PlayerBlobBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collider.TryGetComponent<MobSmokerBehaviour>(out var mob))
+        if (!collision.otherCollider.TryGetComponent<MobSmokerBehaviour>(out var mob))
         {
             return;
         }

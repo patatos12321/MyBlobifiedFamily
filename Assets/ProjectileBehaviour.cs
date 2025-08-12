@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
+    public int Pushback = 1000;
     public int Damage = 10;
     public int Speed = 100;
     public int Range = 5;
@@ -41,25 +42,22 @@ public class ProjectileBehaviour : MonoBehaviour
         this.GetComponent<Rigidbody2D>().AddForce(new Vector2(direction.x * Speed, direction.y * Speed));
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.collider.CompareTag("OutOfBounds") || collision.otherCollider.CompareTag("OutOfBounds"))
+        if (collider.CompareTag("OutOfBounds"))
         {
             Destroy(this.gameObject);
             return;
         }
 
         //todo: handle different mob types
-        if (!collision.collider.TryGetComponent<MobSmokerBehaviour>(out var mob))
+        if (!collider.TryGetComponent<MobSmokerBehaviour>(out var mob))
         {
-            collision.otherCollider.TryGetComponent(out mob);
-            if (mob == null)
-            {
-                return;
-            }
+            return;
         }
 
         mob.Damage(Damage);
+        mob.Push(Pushback, this.transform.position);
         Destroy(this.gameObject);
     }
 }
