@@ -1,11 +1,11 @@
 using TMPro;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerBlobBehaviour : MonoBehaviour
 {
-    public float MoveSpeed = 0.3f;
+    public int Acceleration = 100;
+    public float MaxSpeed = 0.5f;
+
     public WeaponBehaviour[] WeaponBehaviours;
     public int PushbackStrength = 30000;
 
@@ -38,49 +38,57 @@ public class PlayerBlobBehaviour : MonoBehaviour
     {
         DecayInvincibility();
 
-        var newPosition = _rb.position;
+        Move();
+
+    }
+
+    private void Move()
+    {
+        var accelerationModificator = 1f;
+        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
+            && (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow)))
+        {
+            accelerationModificator = accelerationModificator / 2;
+        }
+        var modifiedAcceleration = Acceleration * accelerationModificator;
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            newPosition.x -= MoveSpeed;
+            if (_rb.linearVelocityX > -MaxSpeed)
+            {
+                _rb.AddForceX(-modifiedAcceleration);
+            }
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            newPosition.x += MoveSpeed;
+            if (_rb.linearVelocityX < MaxSpeed)
+            {
+                _rb.AddForceX(modifiedAcceleration);
+            }
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            newPosition.y -= MoveSpeed;
+            if (_rb.linearVelocityY > -MaxSpeed)
+            {
+                _rb.AddForceY(-modifiedAcceleration);
+            }
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            newPosition.y += MoveSpeed;
+            if (_rb.linearVelocityY < MaxSpeed)
+            {
+                _rb.AddForceY(modifiedAcceleration);
+            }
         }
-
-        newPosition = HandleOutOfBounds(newPosition);
-
-        _rb.MovePosition(newPosition);
-    }
-
-    private static Vector2 HandleOutOfBounds(Vector2 newPosition)
-    {
-        if (newPosition.y > 10)
-            newPosition.y = 10;
-        if (newPosition.y < -10)
-            newPosition.y = -10;
-        if (newPosition.x > 10)
-            newPosition.x = 10;
-        if (newPosition.x < -10)
-            newPosition.x = -10;
-        return newPosition;
     }
 
     private void DecayInvincibility()
     {
         if (_invincibilityDelay <= 0) return;
-        
+
         _invincibilityDelay--;
 
-        if (_invincibilityDelay <=0)
+        if (_invincibilityDelay <= 0)
         {
             _animator.SetBool("Invincible", false);
         }
@@ -115,9 +123,9 @@ public class PlayerBlobBehaviour : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collider.TryGetComponent<MobSmokerBehaviour>(out var mob))
+        if (!collision.otherCollider.TryGetComponent<MobSmokerBehaviour>(out var mob))
         {
             return;
         }

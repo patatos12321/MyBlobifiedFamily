@@ -58,6 +58,7 @@ public class WaveManager : MonoBehaviour
 
     private void UpdateCoins()
     {
+        if (_gameManager == null) return;
         CoinsText.text = _gameManager.NbCoins.ToString();
     }
 

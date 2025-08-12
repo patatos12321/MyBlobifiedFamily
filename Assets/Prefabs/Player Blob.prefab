@@ -103,7 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5bc17e5ae4560a478685578552169d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 0.1
+  Acceleration: 1000
+  MaxSpeed: 0.5
   WeaponBehaviours:
   - {fileID: 7215919345529689527, guid: 6e96c651f8e443849a8c8a6c82120c2d, type: 3}
   PushbackStrength: 10000
