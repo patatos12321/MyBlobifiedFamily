@@ -7,7 +7,12 @@ public class CoinBehaviour : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            FindFirstObjectByType<GameManagerBehaviour>().AddMoney(Amount);
+            var gameManager = FindFirstObjectByType<GameManagerBehaviour>();
+            if (gameManager != null)
+            {
+                gameManager.AddMoney(Amount);
+            }
+
             Destroy(gameObject);
         }
     }
