@@ -1,3 +1,4 @@
+using Assets.Scripts.Domain;
 using UnityEngine;
 
 public class CoinBehaviour : MonoBehaviour
@@ -5,9 +6,9 @@ public class CoinBehaviour : MonoBehaviour
     public int Amount;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag(Tag.Player))
         {
-            var gameManager = FindFirstObjectByType<GameManagerBehaviour>();
+            var gameManager = GameManagerBehaviour.Instance;
             if (gameManager != null)
             {
                 gameManager.AddMoney(Amount);

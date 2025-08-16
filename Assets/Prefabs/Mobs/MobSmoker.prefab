@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd9ae82c422cbc64c9348650d3c5fa3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Coin: {fileID: 810835740018166299, guid: 49eb2a0677b989140918de06180d4188, type: 3}
+  Coin: {fileID: 8709638750032606951, guid: 49eb2a0677b989140918de06180d4188, type: 3}
   Strength: 10
   Value: 1
+  MobName: Smoker

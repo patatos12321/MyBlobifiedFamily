@@ -161,7 +161,7 @@ public class PlayerBlobBehaviour : MonoBehaviour
 
     private static void Lose()
     {
-        var gameManager = FindFirstObjectByType<GameManagerBehaviour>();
+        var gameManager = GameManagerBehaviour.Instance;
         gameManager.Defeat();
     }
 

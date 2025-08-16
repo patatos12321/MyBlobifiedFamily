@@ -1,13 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Scripts.Domain
+﻿namespace Assets.Scripts.Domain
 {
     public enum MobType
     {
         Smoker
+    }
+
+    public static class SceneName
+    {
+        public const string Game = "Game";
+        public const string Title = "Title";
+        public const string Defeat = "Defeat";
+        public const string QuestSelect = "QuestSelect";
+    }
+
+    public static class Tag
+    {
+        public const string Player = "Player";
+        public const string OutOfBounds = "OutOfBounds";
     }
 }

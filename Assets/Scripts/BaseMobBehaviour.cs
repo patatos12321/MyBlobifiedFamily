@@ -5,13 +5,14 @@ public class BaseMobBehaviour : MonoBehaviour
     private Rigidbody2D _rb;
     private WaveManager _waveManager;
 
-    public GameObject Coin;
+    public CoinBehaviour Coin;
 
     public const int NbFramesBeforeLaunch = 15;
     public const int Speed = 1000;
     public const int MaxHealth = 50;
     public int Strength = 10;
     public int Value = 1;
+    public string MobName;
     private int _currentHealth = 50;
 
     private int _currentNbFramesBeforeLaunch = 0;
@@ -27,6 +28,8 @@ public class BaseMobBehaviour : MonoBehaviour
     {
         Move();
     }
+
+    public Sprite Sprite => this.GetComponent<SpriteRenderer>().sprite;
 
     protected virtual void Move()
     {
@@ -70,7 +73,8 @@ public class BaseMobBehaviour : MonoBehaviour
     {
         var coin = Instantiate(Coin);
         coin.transform.position = this.transform.position;
-        coin.GetComponent<CoinBehaviour>().Amount = Value;
+        coin.Amount = Value;
+        _waveManager.RegisterDeath(this);
         Destroy(this.gameObject);
     }
 
