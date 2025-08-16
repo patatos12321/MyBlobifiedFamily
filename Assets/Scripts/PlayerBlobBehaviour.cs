@@ -125,7 +125,7 @@ public class PlayerBlobBehaviour : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.otherCollider.TryGetComponent<MobSmokerBehaviour>(out var mob))
+        if (!collision.otherCollider.TryGetComponent<BaseMobBehaviour>(out var mob))
         {
             if (!collision.collider.TryGetComponent(out mob))
             {
@@ -148,7 +148,7 @@ public class PlayerBlobBehaviour : MonoBehaviour
         _animator.SetBool("Invincible", true);
     }
 
-    private void Pushback(MobSmokerBehaviour mob)
+    private void Pushback(BaseMobBehaviour mob)
     {
         mob.Push(PushbackStrength, this.transform.position);
     }
@@ -161,7 +161,7 @@ public class PlayerBlobBehaviour : MonoBehaviour
 
     private static void Lose()
     {
-        var gameManager = FindFirstObjectByType<GameManagerBehaviour>();
+        var gameManager = GameManagerBehaviour.Instance;
         gameManager.Defeat();
     }
 

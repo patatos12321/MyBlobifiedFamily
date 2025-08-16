@@ -6,7 +6,7 @@ public class ScoreBehaviour : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        var gameManager = FindFirstObjectByType<GameManagerBehaviour>();
+        var gameManager = GameManagerBehaviour.Instance;
         var text = GetComponent<TMP_Text>();
 
         text.text = $"{gameManager.NbCoins} coins";

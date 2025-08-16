@@ -1,3 +1,4 @@
+using Assets.Scripts.Domain;
 using System.Linq;
 using UnityEngine;
 
@@ -9,12 +10,12 @@ public class ProjectileBehaviour : MonoBehaviour
     public int Speed = 100;
     public int Range = 5;
 
-    private MobSmokerBehaviour _closestMob;
+    private BaseMobBehaviour _closestMob;
 
     private void Start()
     {
         //todo: find every type of mobs
-        var mobs = FindObjectsByType<MobSmokerBehaviour>(FindObjectsSortMode.None);
+        var mobs = FindObjectsByType<BaseMobBehaviour>(FindObjectsSortMode.None);
         if (!mobs.Any())
         {
             Destroy(this.gameObject);
@@ -51,14 +52,13 @@ public class ProjectileBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("OutOfBounds"))
+        if (IsOutOfBounds(collider))
         {
             Destroy(this.gameObject);
             return;
         }
 
-        //todo: handle different mob types
-        if (!collider.TryGetComponent<MobSmokerBehaviour>(out var mob))
+        if (!collider.TryGetComponent<BaseMobBehaviour>(out var mob))
         {
             return;
         }
@@ -66,6 +66,11 @@ public class ProjectileBehaviour : MonoBehaviour
         mob.Damage(Damage);
         mob.Push(Pushback, this.transform.position);
         Destroy(this.gameObject);
+    }
+
+    private static bool IsOutOfBounds(Collider2D collider)
+    {
+        return collider.CompareTag(Tag.OutOfBounds);
     }
 
     public void LookAt(Transform target)

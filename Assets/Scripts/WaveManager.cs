@@ -1,7 +1,9 @@
-using System;
-using System.Diagnostics;
+using Assets.Scripts.Domain;
+using System.Linq;
+using System.Text;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaveManager : MonoBehaviour
 {
@@ -16,25 +18,27 @@ public class WaveManager : MonoBehaviour
     private readonly int _spawnWarningDelay = 30;
     private Vector3 _spawnLocation;
 
-    private int _delay = 150;
-    private int _currentDelay = 100;
+    private int _delay = 75;
+    private int _currentDelay = 25;
+    private Wave _wave;
 
-    private Stopwatch _timer = new Stopwatch();
-    public TMP_Text TimerText;
+    public TMP_Text ObjectivesText;
     public TMP_Text CoinsText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-       _gameManager = FindFirstObjectByType<GameManagerBehaviour>();
+        _gameManager = GameManagerBehaviour.Instance;
+        _wave = _gameManager.CurrentWave;
         _player = FindFirstObjectByType<PlayerBlobBehaviour>();
-        _timer.Start();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        HandleCompletedQuests();
+
         _currentDelay++;
-        InstantiateSpawnWarning();
+        HandleSpawnWarning();
         if (_currentDelay < _delay)
         {
             return;
@@ -44,16 +48,32 @@ public class WaveManager : MonoBehaviour
         SpawnMobs();
         _currentDelay = 0;
     }
+
+    private void HandleCompletedQuests()
+    {
+        if (_wave == null)
+            return;
+
+        if (_wave.Quest.Objectives.All(q => q.IsCompleted))
+        {
+            SceneManager.LoadScene(SceneName.QuestSelect);
+        }
+    }
+
     private void Update()
     {
-        UpdateTimer();
+        UpdateObjectives();
         UpdateCoins();
     }
 
-    private void UpdateTimer()
+    private void UpdateObjectives()
     {
-        var minutes = Math.Floor(_timer.Elapsed.TotalMinutes);
-        TimerText.text = $"{minutes}:{_timer.Elapsed.Seconds:00}";
+        var objectivesTextBuilder = new StringBuilder();
+        foreach (var objective in _wave.Quest.Objectives)
+        {
+            objectivesTextBuilder.AppendLine($"{objective.NbKilled}/{objective.NbRequiredKills} {objective.Mob.MobName}");
+        }
+        ObjectivesText.text = objectivesTextBuilder.ToString();
     }
 
     private void UpdateCoins()
@@ -76,13 +96,24 @@ public class WaveManager : MonoBehaviour
         _instantiatedSpawnWarning = null;
     }
 
-    private void InstantiateSpawnWarning()
+    private void HandleSpawnWarning()
     {
         if (_instantiatedSpawnWarning == null && _currentDelay >= _delay - _spawnWarningDelay)
         {
             var rand = new System.Random();
             _spawnLocation = new Vector3(rand.Next(-10, 10), rand.Next(-10, 10), this.gameObject.transform.position.z);
             _instantiatedSpawnWarning = Instantiate(SpawnWarning, _spawnLocation, Quaternion.identity, this.transform);
+        }
+    }
+
+    public void RegisterDeath(BaseMobBehaviour mob)
+    {
+        foreach (var objective in _wave.Quest.Objectives)
+        {
+            if (objective.Mob.MobName == mob.MobName)
+            {
+                objective.RegisterKill();
+            }
         }
     }
 }
