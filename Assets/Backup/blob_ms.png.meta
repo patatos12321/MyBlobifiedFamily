@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: b2a1656f2a415994cb7f9798264977ed
+guid: 4b0ce5abc1fe58546a6a0698234af9b4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2089496485197201601
-    second: new blob_0
-  - first:
-      213: 6606215976177335543
-    second: new blob_1
+      213: 3257757836535344968
+    second: blob_ms_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,7 +97,33 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -116,45 +139,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: new blob_0
+      name: blob_ms_0
       rect:
         serializedVersion: 2
-        x: 279
-        y: 647
-        width: 301
-        height: 327
+        x: 0
+        y: 4
+        width: 64
+        height: 58
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f3fb460740e9003e0800000000000000
-      internalID: -2089496485197201601
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: new blob_1
-      rect:
-        serializedVersion: 2
-        x: 631
-        y: 579
-        width: 900
-        height: 799
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7fc7f89dd6efdab50800000000000000
-      internalID: 6606215976177335543
+      spriteID: 84f2fe2fd71e53d20800000000000000
+      internalID: 3257757836535344968
       vertices: []
       indices: 
       edges: []
@@ -163,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ec5bd46a6e722eb4e9ed81b734ba020e
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      new blob_0: -2089496485197201601
-      new blob_1: 6606215976177335543
+      blob_ms_0: 3257757836535344968
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

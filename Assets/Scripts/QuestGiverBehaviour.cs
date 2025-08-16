@@ -32,6 +32,7 @@ public class QuestGiverBehaviour : MonoBehaviour
         {
             var instantiatedQuestGiver = Instantiate(ProposedQuestBehaviourPrefab, this.transform);
             instantiatedQuestGiver.Quest = quest;
+            instantiatedQuestGiver.SetQuestGiverParent(this);
         }
 
         selectedQuest = Quests.FirstOrDefault();
@@ -49,7 +50,6 @@ public class QuestGiverBehaviour : MonoBehaviour
 
     public void DepartOnQuest()
     {
-        Debug.Log("Quest giver goes on quest");
         _gameManagerBehaviour.DepartOnQuest(selectedQuest);
     }
 }

@@ -4,9 +4,14 @@ using UnityEngine.UI;
 
 public class ProposedQuestBehaviour : MonoBehaviour
 {
-    public Quest Quest;
+    private QuestGiverBehaviour _questGiverBehaviour;
     public ObjectiveBehaviour ObjectivePrefab;
-    public QuestGiverBehaviour QuestGiverBehaviour;
+    public Quest Quest;
+
+    public void SetQuestGiverParent(QuestGiverBehaviour questGiverBehaviour)
+    {
+        _questGiverBehaviour = questGiverBehaviour;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -22,6 +27,6 @@ public class ProposedQuestBehaviour : MonoBehaviour
 
     void QuestSelected()
     {
-        QuestGiverBehaviour.SelectQuest(Quest);
+        _questGiverBehaviour.SelectQuest(Quest);
     }
 }

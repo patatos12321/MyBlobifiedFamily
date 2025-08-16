@@ -29,7 +29,6 @@ public class GameManagerBehaviour : MonoBehaviour
 
     private void ResetWaves()
     {
-        Debug.Log("GameManagerBehavior resets all quests");
         _waves.Clear();
     }
 
@@ -57,7 +56,6 @@ public class GameManagerBehaviour : MonoBehaviour
 
     public void DepartOnQuest(Quest quest)
     {
-        Debug.Log("GameManagerBehavior goes on quest");
         _waves.Add(new Wave(WaveNumber+1, quest));
         SceneManager.LoadScene(SceneName.Game);
     }

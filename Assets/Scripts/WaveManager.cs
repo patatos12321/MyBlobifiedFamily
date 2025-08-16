@@ -68,8 +68,10 @@ public class WaveManager : MonoBehaviour
 
     private void UpdateObjectives()
     {
+        if (_wave == null) return;
+
         var objectivesTextBuilder = new StringBuilder();
-        foreach (var objective in _wave.Quest.Objectives)
+        foreach (var objective in _wave?.Quest?.Objectives)
         {
             objectivesTextBuilder.AppendLine($"{objective.NbKilled}/{objective.NbRequiredKills} {objective.Mob.MobName}");
         }
@@ -108,6 +110,9 @@ public class WaveManager : MonoBehaviour
 
     public void RegisterDeath(BaseMobBehaviour mob)
     {
+        if (_wave == null)
+            return;
+
         foreach (var objective in _wave.Quest.Objectives)
         {
             if (objective.Mob.MobName == mob.MobName)

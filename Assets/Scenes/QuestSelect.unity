@@ -407,7 +407,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 692266420}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afd363f55da497d47b7a711810b2fcf4, type: 3}
+  m_Script: {fileID: 11500000, guid: bf6379464116a6a43aad17dee0568d26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AvailableMobs:
