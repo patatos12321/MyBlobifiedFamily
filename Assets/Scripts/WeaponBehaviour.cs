@@ -4,7 +4,7 @@ using UnityEngine;
 public class WeaponBehaviour : MonoBehaviour
 {
     public ProjectileBehaviour Projectile;
-    private MobSmokerBehaviour _closestMob;
+    private BaseMobBehaviour _closestMob;
 
     public int Cooldown = 1000;
     public int Range = 5;
@@ -50,7 +50,7 @@ public class WeaponBehaviour : MonoBehaviour
 
     private void FindClosestMob()
     {
-        var mobs = FindObjectsByType<MobSmokerBehaviour>(FindObjectsSortMode.None);
+        var mobs = FindObjectsByType<BaseMobBehaviour>(FindObjectsSortMode.None);
         if (mobs.Any())
         {
             _closestMob = mobs[0];
@@ -76,7 +76,7 @@ public class WeaponBehaviour : MonoBehaviour
         Destroy(instance, 120);
     }
 
-    public void LookAt(MobSmokerBehaviour target)
+    public void LookAt(BaseMobBehaviour target)
     {
         _closestMob = target;
         var direction = target.transform.position - transform.position;

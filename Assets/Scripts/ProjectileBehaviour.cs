@@ -9,12 +9,12 @@ public class ProjectileBehaviour : MonoBehaviour
     public int Speed = 100;
     public int Range = 5;
 
-    private MobSmokerBehaviour _closestMob;
+    private BaseMobBehaviour _closestMob;
 
     private void Start()
     {
         //todo: find every type of mobs
-        var mobs = FindObjectsByType<MobSmokerBehaviour>(FindObjectsSortMode.None);
+        var mobs = FindObjectsByType<BaseMobBehaviour>(FindObjectsSortMode.None);
         if (!mobs.Any())
         {
             Destroy(this.gameObject);
@@ -58,7 +58,7 @@ public class ProjectileBehaviour : MonoBehaviour
         }
 
         //todo: handle different mob types
-        if (!collider.TryGetComponent<MobSmokerBehaviour>(out var mob))
+        if (!collider.TryGetComponent<BaseMobBehaviour>(out var mob))
         {
             return;
         }
