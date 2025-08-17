@@ -3175,6 +3175,22 @@ PrefabInstance:
       propertyPath: CurrentHealthText
       value: 
       objectReference: {fileID: 1663392145}
+    - target: {fileID: 3041105469622315730, guid: 13ee999fc74109149baadec53f68a57e, type: 3}
+      propertyPath: WeaponBehaviours.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3041105469622315730, guid: 13ee999fc74109149baadec53f68a57e, type: 3}
+      propertyPath: 'WeaponBehaviours.Array.data[1]'
+      value: 
+      objectReference: {fileID: 7215919345529689527, guid: 6e96c651f8e443849a8c8a6c82120c2d, type: 3}
+    - target: {fileID: 3041105469622315730, guid: 13ee999fc74109149baadec53f68a57e, type: 3}
+      propertyPath: 'WeaponBehaviours.Array.data[2]'
+      value: 
+      objectReference: {fileID: 7215919345529689527, guid: 6e96c651f8e443849a8c8a6c82120c2d, type: 3}
+    - target: {fileID: 3041105469622315730, guid: 13ee999fc74109149baadec53f68a57e, type: 3}
+      propertyPath: 'WeaponBehaviours.Array.data[3]'
+      value: 
+      objectReference: {fileID: 7215919345529689527, guid: 6e96c651f8e443849a8c8a6c82120c2d, type: 3}
     - target: {fileID: 3802937712802250883, guid: 13ee999fc74109149baadec53f68a57e, type: 3}
       propertyPath: m_IsTrigger
       value: 0

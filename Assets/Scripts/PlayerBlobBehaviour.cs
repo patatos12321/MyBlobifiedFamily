@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -25,12 +27,24 @@ public class PlayerBlobBehaviour : MonoBehaviour
         _currentHealth = MaxHealth;
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        List<Vector3> spawnLocations = GetSpawnLocations();
+
         foreach (var weapon in WeaponBehaviours)
         {
-            //todo: Spawn multiple weapons
-            var spawnLocation = new Vector3(0.5f, 0, this.gameObject.transform.position.z);
+            var spawnLocation = spawnLocations.First();
             Instantiate(weapon, spawnLocation, Quaternion.identity, this.transform);
+            spawnLocations.Remove(spawnLocation);
         }
+    }
+
+    private List<Vector3> GetSpawnLocations()
+    {
+        List<Vector3> spawnLocations = new List<Vector3>();
+        spawnLocations.Add(new Vector3(0.5f, 0, this.gameObject.transform.position.z - 1));
+        spawnLocations.Add(new Vector3(-0.5f, 0, this.gameObject.transform.position.z - 1));
+        spawnLocations.Add(new Vector3(0, 0.5f, this.gameObject.transform.position.z - 1));
+        spawnLocations.Add(new Vector3(0, -0.5f, this.gameObject.transform.position.z - 1));
+        return spawnLocations;
     }
 
     // Update is called once per frame
