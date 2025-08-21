@@ -11,6 +11,7 @@
         public const string Title = "Title";
         public const string Defeat = "Defeat";
         public const string QuestSelect = "QuestSelect";
+        public const string Market = "Market";
     }
 
     public static class Tag

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerBehaviour : MonoBehaviour
 {
+    public const int StartingAmountOfCoins = 10;
     public static GameManagerBehaviour Instance;
 
     private int _nbCoins= 0;
@@ -24,7 +25,7 @@ public class GameManagerBehaviour : MonoBehaviour
         ResetWaves();
         ResetGear();
 
-        SceneManager.LoadScene(SceneName.QuestSelect);
+        SceneManager.LoadScene(SceneName.Market);
     }
 
     private void ResetWaves()
@@ -34,7 +35,7 @@ public class GameManagerBehaviour : MonoBehaviour
 
     private void ResetGear()
     {
-        _nbCoins = 0;
+        _nbCoins = StartingAmountOfCoins;
     }
 
     private void Awake()//singleton
